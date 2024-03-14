@@ -19,6 +19,7 @@ class PageFlipWidget extends StatefulWidget {
     this.transformationController,
     this.onTapPage,
     this.onDoubleTapPage,
+    this.onTapDown,
     this.onDoubleTapDown,
     required this.currentPage,
   })  : assert(initialIndex < children.length, 'initialIndex cannot be greater than children length'),
@@ -38,6 +39,8 @@ class PageFlipWidget extends StatefulWidget {
   final VoidCallback? onTapPage;
   final VoidCallback? onDoubleTapPage;
   final void Function(TapDownDetails)? onDoubleTapDown;
+    final void Function(TapDownDetails)? onTapDown;
+
   final Function(int) currentPage;
 
   @override
@@ -285,7 +288,7 @@ class PageFlipWidgetState extends State<PageFlipWidget> with TickerProviderState
         onTap: widget.onTapPage,
         onDoubleTapDown: widget.onDoubleTapDown,
         onDoubleTap: widget.onDoubleTapPage,
-        onTapDown: (details) {},
+        onTapDown: widget.onTapDown,
         onTapUp: (details) {},
         onPanDown: (details) {},
         onPanEnd: (details) {},
@@ -307,6 +310,7 @@ class PageFlipWidgetState extends State<PageFlipWidget> with TickerProviderState
             ],
           ),
         ),
+      )
     );
   }
 }
